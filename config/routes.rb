@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'search' => 'searches#search'
   resources :groups, only: [:index, :new, :create, :show, :edit, :update] do
     resource :group_users, only: [:create, :destroy]
+    get "new/mail" => "groups#new_mail"
+    get "send/mail" => "groups#send_mail"
   end
   resources :users,only: [:show,:index,:edit,:update] do
      resources :relationships, only: [:create, :destroy]
