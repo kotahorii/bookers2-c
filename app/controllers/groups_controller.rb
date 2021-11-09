@@ -1,11 +1,12 @@
 class GroupsController < ApplicationController
-  # before_action :ensure_correct_user, only: [:update, :edit]
+  before_action :ensure_correct_user, only: [:update, :edit]
 
-  # def ensure_correct_user
-  #   if @current_user.id != params[:id].to_i
-  #     redirect_to groups_path
-  #   end
-  # end
+  def ensure_correct_user
+    @group = Group.find(params[:id])
+    unless @group.owner_id == current_user.id
+      redirect_to groups_path
+    end
+  end
 
 
   def index
