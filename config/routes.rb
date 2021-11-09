@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get 'home/about' => 'homes#about'
   get 'search' => 'searches#search'
-  resources :groups, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  resources :groups, only: [:index, :new, :create, :show, :edit, :update] do
+    resource :group_users, only: [:create, :destroy]
+  end
   resources :users,only: [:show,:index,:edit,:update] do
      resources :relationships, only: [:create, :destroy]
      get 'follow' => 'relationships#follow'
